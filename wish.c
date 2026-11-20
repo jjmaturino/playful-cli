@@ -21,7 +21,12 @@ static int run_shell(FILE *input, int display_prompt){
             fflush(stdout);
         }
         if (getline(&line, &capacity, input) == -1){ break;}
-        printf("%s", line);
+        char *cursor = line;
+        while (cursor != NULL){
+            char *token = strsep(&cursor, " \t\n");
+            if (token[0] == '\0'){ continue;}
+            printf("%s\n", token);
+        }
 
     }
 
